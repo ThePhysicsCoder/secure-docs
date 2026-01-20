@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}Register{% endblock %}
+
+{% block content %}
+
+<div class="auth-shell">
+
+  <div class="auth-card glass">
+
+    <!-- Header -->
+    <div class="auth-header">
+      <h3>Create Account</h3>
+      <p>Start using your secure digital locker.</p>
+    </div>
+
+    <!-- Messages -->
+    {% if messages %}
+      {% for message in messages %}
+        <div class="auth-alert {{ message.tags }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+
+    <!-- Form -->
+    <form method="post">
+      {% csrf_token %}
+
+      <div class="auth-field">
+        <label>Username</label>
+        <input name="username" type="text" required>
+      </div>
+
+      <div class="auth-field">
+        <label>Email</label>
+        <input name="email" type="email" required>
+      </div>
+
+      <div class="auth-field">
+        <label>Password</label>
+        <input name="password" type="password" required>
+      </div>
+
+      <div class="auth-field">
+        <label>Confirm Password</label>
+        <input name="password2" type="password" required>
+      </div>
+
+      <button type="submit" class="auth-btn">
+        Create Account
+      </button>
+    </form>
+
+    <!-- Footer -->
+    <div class="auth-footer">
+      <span>Already have an account?</span>
+      <a href="{% url 'login' %}">Login</a>
+    </div>
+
+  </div>
+
+</div>
+
+{% endblock %}

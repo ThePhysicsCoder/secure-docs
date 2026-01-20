@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Edit Document - Digital Locker{% endblock %}
+
+{% block content %}
+<div class="upload-shell">
+  <div class="glass upload-card">
+
+    <div class="upload-header">
+      <h3>Edit Document</h3>
+      <p>Update document details</p>
+    </div>
+
+    <form method="post">
+      {% csrf_token %}
+
+      <div class="field">
+        <label>Title</label>
+        {{ form.title }}
+      </div>
+
+      <div class="field">
+        <label>Category</label>
+        {{ form.category }}
+      </div>
+
+      <button type="submit" class="upload-btn">
+        Save Changes
+      </button>
+
+      <a href="{% url 'dashboard' %}" class="back-link">
+        ← Cancel
+      </a>
+    </form>
+
+  </div>
+</div>
+{% endblock %}
+

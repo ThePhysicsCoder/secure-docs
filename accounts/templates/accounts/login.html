@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+<div class="auth-shell">
+
+  <div class="auth-card glass">
+
+    <!-- Header -->
+    <div class="auth-header">
+      <h3 style='font-size: 22px;'>Welcome Back</h3>
+      <p>Login to access your digital locker.</p>
+    </div>
+
+    <!-- Messages -->
+    {% if messages %}
+      {% for message in messages %}
+        <div class="auth-alert {{ message.tags }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+
+    <!-- Form -->
+    <form method="post">
+      {% csrf_token %}
+
+      <div class="auth-field">
+        <label>Username</label>
+        <input name="username" type="text" required>
+      </div>
+
+      <div class="auth-field">
+        <label>Password</label>
+
+        <div style="position: relative;">
+          <input
+            id="passwordInput"
+            name="password"
+            type="password"
+            required
+            style="padding-right: 40px;"
+          >
+
+          <span
+            onclick="togglePassword()"
+            style="
+              position: absolute;
+              right: 12px;
+              top: 50%;
+              transform: translateY(-50%);
+              cursor: pointer;
+              user-select: none;
+            "
+            title="Show / Hide Password"
+          >
+            👁️
+          </span>
+        </div>
+      </div>
+
+      <button type="submit" class="auth-btn">
+        Login
+      </button>
+    </form>
+
+    <!-- Footer -->
+    <div class="auth-footer">
+      <span>New here?</span>
+      <a href="{% url 'register' %}">Create an account</a>
+    </div>
+    <div class="auth-footer">
+      <span>forgot password?</span>
+      <a href="{% url 'password_reset' %}">Reset password</a>
+    </div>
+
+  </div>
+
+</div>
+<script>
+  function togglePassword() {
+    const input = document.getElementById("passwordInput");
+    input.type = input.type === "password" ? "text" : "password";
+  }
+</script>
+
+{% endblock %}

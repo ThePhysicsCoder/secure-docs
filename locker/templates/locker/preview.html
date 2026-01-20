@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="preview-shell">
+
+  <div class="preview-header">
+    <h4>{{ doc.title }}</h4>
+    <p>{{ doc.get_category_display }}</p>
+  </div>
+
+  <div class="glass preview-card">
+
+    {% if preview_type == "image" %}
+      <img src="{{ doc.file.url }}" class="preview-image" alt="Document Image">
+
+    {% elif preview_type == "pdf" %}
+        <iframe src="{% url 'stream_pdf' doc.id %}" class="preview-pdf"></iframe>
+
+
+    {% else %}
+      <p class="text-muted text-center">
+        Preview not available for this file type.
+      </p>
+    {% endif %}
+
+  </div>
+
+  <div class="preview-actions">
+    <a href="{% url 'download' doc.id %}" class="btn btn-outline-accent">
+      Download
+    </a>
+    <a href="{% url 'dashboard' %}" class="btn btn-secondary">
+      Back
+    </a>
+  </div>
+
+</div>
+
+{% endblock %}

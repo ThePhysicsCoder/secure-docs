@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="upload-shell">
+
+  <div class="upload-card glass">
+
+    <!-- Header -->
+    <div class="upload-header">
+      {% if messages %}
+      <div class="toast-container">
+        {% for message in messages %}
+          <div class="toast-message {{ message.tags }}">
+            {{ message }}
+          </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+      <h3>Upload Document</h3>
+      <p>Store a file securely in your digital locker.</p>
+    </div>
+
+    <!-- Form -->
+    <form method="post" enctype="multipart/form-data">
+
+      {% csrf_token %}
+
+      <!-- Title -->
+      <div class="field">
+        <label>Document Title</label>
+        {{ form.title }}
+      </div>
+
+
+      <!-- Category -->
+  <div class="field">
+    <label>Category</label>
+
+    <select name="category"
+            style="
+              background-color: rgba(255,255,255,0.08);
+              color: #e5e7eb;
+              border: 1px solid rgba(255,255,255,0.2);
+              padding: 10px 12px;
+              border-radius: 10px;
+              width: 100%;
+            ">
+      {% for value, label in form.category.field.choices %}
+        <option value="{{ value }}"
+                style="background-color:#0f172a; color:#e5e7eb;">
+          {{ label }}
+        </option>
+      {% endfor %}
+    </select>
+  </div>
+
+      <!-- File -->
+      <div class="field">
+        <label>Select File</label>
+
+        <div class="file-input-wrapper">
+          {{ form.file }}
+        </div>
+
+        <span class="hint">
+          PDF, JPG or PNG • Max size depends on browser
+        </span>
+      </div>
+
+      <!-- Action -->
+      <button type="submit" class="upload-btn">
+        Upload Document
+      </button>
+
+    </form>
+
+  </div>
+
+  <!-- Back -->
+  <a href="{% url 'dashboard' %}" class="back-link">
+    ← Back to Dashboard
+  </a>
+
+</div>
+
+{% endblock %}

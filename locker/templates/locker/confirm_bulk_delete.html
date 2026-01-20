@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Confirm Delete | Digital Locker{% endblock %}
+
+{% block content %}
+
+<div class="glass delete-wrapper">
+
+    <div class="delete-icon">🗑️</div>
+
+    <h5 class="delete-title">
+        Confirm Deletion
+    </h5>
+
+    <p class="delete-text">
+        You are about to permanently delete the selected documents.
+        <br>
+        <strong>This action cannot be undone.</strong>
+    </p>
+
+    <!-- Selected Documents List -->
+    <div class="mt-3 mb-4 text-start">
+        <small class="text-muted">Documents selected:</small>
+        <ul class="mt-2 ps-3">
+            {% for doc in documents %}
+                <li>{{ doc.title }}</li>
+            {% empty %}
+                <li>No documents selected.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Actions -->
+    <form method="post" action="{% url 'bulk_delete' %}">
+        {% csrf_token %}
+
+        {% for doc in documents %}
+            <input type="hidden" name="doc_ids" value="{{ doc.id }}">
+        {% endfor %}
+
+        <div class="delete-actions">
+            <button type="submit" class="btn btn-danger-soft">
+                Yes, Delete
+            </button>
+
+            <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary">
+                Cancel
+            </a>
+        </div>
+    </form>
+
+</div>
+
+{% endblock %}

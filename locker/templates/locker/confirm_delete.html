@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="delete-wrapper glass">
+
+    <div class="delete-icon">🗑️</div>
+
+    <h4 class="delete-title">Delete Document</h4>
+
+    <p class="delete-text">
+        You are about to permanently delete
+        <strong>{{ doc.title }}</strong>.
+        <br>
+        This action cannot be undone.
+    </p>
+
+    <form method="post" class="delete-actions">
+        {% csrf_token %}
+
+        <button type="submit" class="btn btn-danger-soft">
+            Yes, Delete
+        </button>
+
+        <a href="{% url 'dashboard' %}" class="btn btn-outline-accent">
+            Cancel
+        </a>
+    </form>
+</div>
+
+{% endblock %}

@@ -10,6 +10,7 @@ from django.views.decorators.clickjacking import xframe_options_exempt
 from .utils import generate_thumbnail
 
 
+
 @login_required
 def dashboard(request):
     query = request.GET.get('q', '')

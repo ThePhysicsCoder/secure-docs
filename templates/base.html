@@ -33,6 +33,15 @@
         .brand-icon {
         font-size: 20px;
         }
+
+      .brand-link {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        text-decoration: none;
+        color: inherit;
+      }
+
     </style>
 </head>
 
@@ -42,7 +51,9 @@
 <nav class="app-navbar">
     <div class="nav-left">
       <span class="brand-icon-shield"></span>
+      <a href="{% url 'dashboard' %}" class="brand-link">
       <span class="brand-text" style='font-size: 23px;'>Secure Docs</span>
+      </a>
     </div>
 
     {% if user.is_authenticated %}

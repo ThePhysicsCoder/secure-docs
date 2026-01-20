@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Dashboard | Vault Zen</title>
+  <title>Dashboard | Secure Docs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&display=swap" rel="stylesheet">
 
@@ -12,7 +12,8 @@
 
   <!-- App CSS -->
   <link rel="stylesheet" href="{% static 'locker/css/style.css' %}">
-  <link rel="icon" href="{% static 'favicon.svg' %}" type="image/svg+xml">
+  <link rel="icon" href="{% static 'favicon.svg' %}" type="image/svg+xml" sizes="any">
+  <link rel="icon" href="{% static 'favicon.png' %}" type="image/png">
 
   <style>
       /* ===============================
@@ -47,6 +48,14 @@
         font-weight: 600;
         letter-spacing: 0.4px;
       }
+      .brand-link {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        text-decoration: none;
+        color: inherit;
+      }
+
       .brand-text {
         font-weight: 700;
         letter-spacing: 0.4px;
@@ -625,8 +634,11 @@
     <!-- Left -->
     <div class="top-left">
       <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+    
       <span class="brand-icon-shield"></span>
+    <a href="{% url 'dashboard' %}" class="brand-link">
       <span class="brand-text" >Secure Docs</span>
+    </a>
     </div>
 
     <!-- Search icon (mobile only) -->

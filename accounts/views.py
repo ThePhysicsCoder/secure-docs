@@ -26,51 +26,21 @@ def register_view(request):
             messages.error(request, "Password mismatch")
 
         else:
-            # 🔐 CREATE USER BUT INACTIVE
             user = User.objects.create_user(
                 username=username,
                 password=password,
-                email=email
+                email=email,
+                is_active=True   # ✅ DIRECTLY ACTIVE
             )
-            user.is_active = False   # 🔥 IMPORTANT
-            user.save()
-
-            # 🔐 GENERATE VERIFICATION LINK
-            uid = urlsafe_base64_encode(force_bytes(user.pk))
-            token = default_token_generator.make_token(user)
-
-            verification_link = request.build_absolute_uri(
-                reverse('verify-email', kwargs={
-                    'uidb64': uid,
-                    'token': token
-                })
-            )
-
-            # 📧 SEND EMAIL
-            subject = "Verify your Digital Locker account"
-            message = f"""
-                Hi {user.username},
-
-                Please verify your account by clicking the link below:
-
-                {verification_link}
-
-                If you did not create this account, ignore this email.
-                """
-            try:
-                    user.email_user(subject, message)
-            except Exception as e:
-                    # Log error (optional)
-                    print("Email sending failed:", e)
-
 
             messages.success(
                 request,
-                "Account created! Please check your email to verify your account."
+                "Account created successfully. You can now login."
             )
             return redirect('login')
 
     return render(request, 'accounts/register.html')
+
 
 def verify_email(request, uidb64, token):
     try:

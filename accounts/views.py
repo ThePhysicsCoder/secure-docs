@@ -57,7 +57,12 @@ def register_view(request):
 
                 If you did not create this account, ignore this email.
                 """
-            user.email_user(subject, message)
+            try:
+                    user.email_user(subject, message)
+            except Exception as e:
+                    # Log error (optional)
+                    print("Email sending failed:", e)
+
 
             messages.success(
                 request,

@@ -93,7 +93,6 @@ def delete_document(request, doc_id):
         return redirect('dashboard')
     return render(request, "locker/confirm_delete.html", {'doc': doc})
 
-
 @login_required
 def preview_document(request, doc_id):
     try:

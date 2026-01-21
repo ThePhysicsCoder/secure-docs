@@ -13,8 +13,27 @@
     {% if preview_type == "image" %}
       <img src="{{ doc.file.url }}" class="preview-image" alt="Document Image">
 
+    {% comment %} {% elif preview_type == "pdf" %}
+        <iframe src="{% url 'stream_pdf' doc.id %}" class="preview-pdf"></iframe> {% endcomment %}
+
     {% elif preview_type == "pdf" %}
-        <iframe src="{% url 'stream_pdf' doc.id %}" class="preview-pdf"></iframe>
+
+      <!-- Desktop PDF Preview -->
+      <iframe
+        src="{% url 'stream_pdf' doc.id %}"
+        class="preview-pdf desktop-only">
+      </iframe>
+
+      <!-- Mobile fallback -->
+      <div class="mobile-only text-center">
+        <p class="text-muted">
+          PDF preview is not supported on mobile browsers.
+        </p>
+        <a href="{% url 'stream_pdf' doc.id %}" target="_blank"
+          class="btn btn-outline-accent w-100">
+          Open PDF
+        </a>
+      </div>
 
 
     {% else %}

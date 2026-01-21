@@ -766,6 +766,25 @@
           font-size: 16px;
           opacity: 0.7;
         }
+        /* Desktop only */
+        .desktop-only {
+          display: block;
+        }
+
+        /* Mobile only */
+        .mobile-only {
+          display: none;
+        }
+
+        /* Switch behavior on small screens */
+        @media (max-width: 768px) {
+          .desktop-only {
+            display: none;
+          }
+          .mobile-only {
+            display: block;
+          }
+        }
 
         .toggle-password:hover {
           opacity: 1;
